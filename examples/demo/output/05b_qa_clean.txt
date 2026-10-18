@@ -1,0 +1,8 @@
+PASS  row_count: 1,669 rows (min 1)
+PASS  grain_unique: 0 duplicated key(s) on (customer_id); fan-out from a join if > 0
+PASS  key_not_null: 0 rows with a NULL key part
+PASS  population_preserved: base population 1,669 vs output 1,669 (diff +0)
+PASS  no_leakage[last_event_ts]: 0 rows where last_event_ts is AFTER anchor anchor_ts
+PASS  no_leakage[last_ticket_ts]: 0 rows where last_ticket_ts is AFTER anchor anchor_ts
+
+6/6 checks passed

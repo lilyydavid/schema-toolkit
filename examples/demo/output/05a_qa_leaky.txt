@@ -1,0 +1,7 @@
+PASS  row_count: 1,565,812 rows (min 1)
+FAIL  grain_unique: 1,637 duplicated key(s) on (customer_id); fan-out from a join if > 0
+PASS  key_not_null: 0 rows with a NULL key part
+FAIL  no_leakage[last_event_ts]: 356,444 rows where last_event_ts is AFTER anchor anchor_ts
+PASS  no_leakage[last_ticket_ts]: 0 rows where last_ticket_ts is AFTER anchor anchor_ts
+
+3/5 checks passed — do NOT trust this dataset yet.

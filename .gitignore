@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.venv/
+*.db
+.env
+# your real warehouse schema is private: keep it out of the public toolkit repo
+/SCHEMA.md
+/DOMAINS.md

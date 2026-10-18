@@ -1,0 +1,6 @@
+ERROR  silver_invoices: stated grain is violated by the data (duplicates present)
+WARN   silver_invoices: no primary key
+WARN   customer_id: same column, different types (INTEGER in silver_customers, silver_subscriptions, silver_events, silver_tickets, gold_customers; TEXT in silver_invoices); casts needed in joins
+INFO   customers: same table name in multiple places (silver_customers, gold_customers); record which is canonical
+
+1 error(s), 3 other finding(s).

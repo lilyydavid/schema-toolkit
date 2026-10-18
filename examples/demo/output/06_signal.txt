@@ -1,0 +1,11 @@
+rows analysed: 1,669   label mean: 0.2942
+
+feature                             n   cov        r  perm p  stable  verdict
+events_30d                      1,669  100%   -0.489   0.005       -  SIGNAL
+tickets_90d                     1,669  100%    0.103   0.005       -  SIGNAL
+
+quintile lift for events_30d (label mean by feature bin, low→high):
+  0.724  0.452  0.228  0.069  0.000
+
+quintile lift for tickets_90d (label mean by feature bin, low→high):
+  0.267  0.240  0.269  0.320  0.374

@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "schemakit"
+version = "0.1.0"
+description = "A process and toolkit for building a grounded SCHEMA.md so humans and AI can write correct queries on a warehouse they just met."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = ["sqlalchemy>=1.4"]
+
+[project.optional-dependencies]
+# Add the driver for your warehouse, e.g. pip install "schemakit[snowflake]"
+snowflake = ["snowflake-sqlalchemy"]
+bigquery = ["sqlalchemy-bigquery"]
+postgres = ["psycopg2-binary"]
+redshift = ["sqlalchemy-redshift", "psycopg2-binary"]
+duckdb = ["duckdb-engine"]
+
+[project.scripts]
+schemakit = "schemakit.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["schemakit*"]
+
+[tool.setuptools.package-data]
+schemakit = ["templates/*.md"]
