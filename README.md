@@ -7,6 +7,9 @@ This toolkit fixes that. In about a week you get a `SCHEMA.md` that you have ver
 means, its keys, its time columns, its traps, and how the tables join. Then your AI plans queries from that file instead
 of guessing.
 
+Everything runs locally on your machine: no accounts, no servers, no SaaS, no telemetry. `SCHEMA.md` is a plain file you
+own. The only network traffic is what your database driver and your AI assistant already do.
+
 It's a starting point, not a finished product. Fork it, delete what you don't need, and add the checks your data keeps needing.
 
 ## The idea
