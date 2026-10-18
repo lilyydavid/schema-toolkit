@@ -48,7 +48,7 @@ untested elsewhere, so if a check errors on your data stack, the plain SQL in [`
 ## Layout
 
 ```
-README.md  INSTALL.md  AGENTS.md  pyproject.toml
+README.md  AGENTS.md  pyproject.toml
 .claude/commands/   /schema-init  /schema-add  /schema-ask
 docs/        the method, one page per step, and this reference
 prompts/     copy-paste AI prompts for chat-only use (the slash commands cover Claude Code)
