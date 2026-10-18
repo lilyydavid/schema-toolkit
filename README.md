@@ -1,5 +1,8 @@
 # schema-toolkit: build your own `SCHEMA.md` when you join a new company
 
+I learned my last warehouse the slow way, from lunch-time workshops and a mental map in my head. This is the process I
+use now, written down so anyone joining a new company can do it in a week.
+
 **For anyone starting a new data, analytics, ML or engineering job** (or inheriting a warehouse they didn't build) who
 wants to learn the tables fast and get an AI assistant that doesn't guess.
 
@@ -10,24 +13,29 @@ checked for leakage and honest about whether there's any signal.
 - **Works for any company and any warehouse.** Nothing here is specific to one industry or stack.
 - **A week, not years.** Pick 5–6 domains, profile their anchor tables, prove the joins, grow from there.
 - **The AI never touches your database.** You run the measurements; the AI reasons from what you paste.
+- **A starting point to fork.** Delete what you don't need and add the checks your data keeps needing.
 
 ## Install: paste this into Claude Code
 
-> Install the toolkit at https://github.com/lilydavida/schema-toolkit by following its `## Setup instructions for Claude Code` section in the README. Then run the demo.
+> Install the toolkit at https://github.com/lilydavida/schema-toolkit by following its `## Setup instructions for Claude Code` section in the README. Then run the demo, and help me build my SCHEMA.md.
 
 ## Setup instructions for Claude Code
 
-If you're Claude Code following the prompt above, do these in order:
+If you're Claude Code following the prompt above, do these steps in order:
 
 1. **Clone** (skip if it exists): `git clone https://github.com/lilydavida/schema-toolkit.git ~/schema-toolkit`
-2. **Install the CLI:** `pip install -e ~/schema-toolkit` (try `pip3` / `python3 -m pip` if needed).
+2. **Install the CLI:** `pip install -e ~/schema-toolkit` (try `pip3` / `python3 -m pip` if needed). This installs one dependency, SQLAlchemy.
 3. **Install the slash commands:** `mkdir -p ~/.claude/commands && cp ~/schema-toolkit/.claude/commands/*.md ~/.claude/commands/`
-   This gives the user `/schema-init`, `/schema-add` and `/schema-ask`.
-4. **Run the demo** so the user sees it work with no warehouse: `bash ~/schema-toolkit/examples/demo/run_demo.sh`,
-   then show them `examples/demo/output/SCHEMA.example.md` and the QA output for the sloppy vs the grounded query
+   This is a global change: it adds `/schema-init`, `/schema-add` and `/schema-ask` to every project for this user.
+4. **Run the demo** so the user sees it work with no warehouse: `bash ~/schema-toolkit/examples/demo/run_demo.sh`.
+   Then show them `examples/demo/output/SCHEMA.example.md` and the QA output for the sloppy vs the grounded query
    (`05a_qa_leaky.txt`, `05b_qa_clean.txt`).
-5. **Tell the user:** the toolkit is installed; type `/schema-init` in the project folder where they want their `SCHEMA.md` to live.
-6. **Do NOT ask for database credentials, and do not connect to the user's warehouse yourself.** The default mode is
+5. **Tell the user:** the toolkit is installed and the three commands are available. That's it. Type `/schema-init` in the
+   project folder where they want their `SCHEMA.md` to live.
+6. **Start the interview now.** Ask the user 2–3 short questions, all at once: what the company sells and how it makes money,
+   which warehouse they use, and the 2–3 questions the business keeps asking. Then propose the 5–6 domains and the first
+   tables to profile. Don't skip this; it's what turns the toolkit into their own. Follow `/schema-init` from there.
+7. **Do NOT ask for database credentials, and do not connect to the user's warehouse yourself.** The default mode is
    that you propose a command, the user runs it, and they paste the output back. Only if the user explicitly says
    "you may run schemakit against my database" may you run it, with a read-only role.
 
@@ -39,54 +47,14 @@ If you're Claude Code following the prompt above, do these in order:
 | `/schema-add <table>` | profile a table, prove its relationships, write the entry, lint |
 | `/schema-ask <question>` | plan → structured SQL → QA assertions → signal check → diagnostics if there's no signal |
 
-Prefer no AI at all? Everything is plain commands (below), and every check has a copy-paste SQL version in [`sql/`](sql/).
+The method runs in two halves. Steps 1–5 build the baseline once and keep it fresh. Steps 6–8 are the four blocks you run every time you ask a question: **what to measure**, **how to source it**, **does the data look right**, and **does it have signal, and if not, why**.
+
+Each step has a short guide in [`docs/`](docs/), and the eight steps, manual commands and repo layout are in [`docs/reference.md`](docs/reference.md).
+
+Prefer no AI at all? Every command runs by hand, and every check has a copy-paste SQL version in [`sql/`](sql/).
 
 **Slash commands or prompts?** Use the slash commands in Claude Code. They're limited to running `schemakit` and editing files.
 Use [`prompts/`](prompts/) when you're in a chat assistant without the commands installed.
-
-## The eight steps
-
-| # | step | you do | tool | guide |
-|---|---|---|---|---|
-| 1 | Find the architecture: CDP, medallion layers, semantic layer | ask + look | `schemakit inventory` | [docs/01](docs/01-discover-architecture.md) |
-| 2 | Name the 5–6 domains that define the business | think | `DOMAINS.md` worksheet | [docs/02](docs/02-pick-domains.md) |
-| 3 | Profile each table: grain, primary key, time columns, fields | run + read | `schemakit profile` | [docs/03](docs/03-profile-tables.md) |
-| 4 | Prove relationships: cardinality, match %, orphans | run + decide | `schemakit relate` | [docs/04](docs/04-validate-relationships.md) |
-| 5 | Grow `SCHEMA.md` incrementally; catch conflicts | write notes | `schemakit lint` | [docs/05](docs/05-build-schema-md.md) |
-| 6 | **What to measure / how to source it**: plan before SQL | plan | `QUERY_PLAN` + [prompts](prompts/) | [docs/06](docs/06-grounded-querying.md) |
-| 7 | **Does the data look right?** grain, fan-out, leakage, nulls | run | `schemakit qa` | [docs/07](docs/07-qa-and-leakage.md) |
-| 8 | **Does it have signal? If not, why?** | run | `schemakit signal` / `diagnose` | [docs/08](docs/08-signal-and-diagnostics.md) |
-
-Steps 1–5 build the baseline once and keep it fresh. Steps 6–8 are your four blocks, every time you ask a question.
-
-## Manual install and commands
-
-```bash
-pip install -e .                       # add a driver for your warehouse, e.g. pip install "schemakit[bigquery]"
-export SCHEMAKIT_URL="bigquery://my-project/my_dataset"    # any SQLAlchemy URL; use a read-only role
-# Only SQLite is tested in CI. For other warehouses, run the same checks from sql/ if a command errors.
-
-schemakit init                         # creates SCHEMA.md and DOMAINS.md from templates
-schemakit inventory --schema silver,gold --counts --out inventory.md
-schemakit profile  --table silver.customers --domain customer --layer silver --write
-schemakit profile  --table silver.orders --grain order_id --write
-schemakit relate   --child silver.orders.customer_id --parent silver.customers.customer_id --write
-schemakit lint
-```
-
-| command | purpose | exit code |
-|---|---|---|
-| `init` | scaffold `SCHEMA.md`, `DOMAINS.md` | 0 |
-| `inventory` | tables, guessed layer/domain, shared key columns | 0 |
-| `profile` | grain / PK / nulls / time ranges → upsert into SCHEMA.md | 0 |
-| `relate` | child→parent cardinality, match %, orphans → SCHEMA.md | 0 |
-| `lint` | unverified grain, orphans, stale profiles, type & twin conflicts | 1 on errors |
-| `qa` | grain uniqueness, population, leakage, null rates on your query | 1 on any fail |
-| `signal` | feature↔label screen: permutation p, time stability, quintile lift | 2 if no signal |
-| `diagnose` | coverage, gaps, percentiles, nulls, predicates, trends, dupes | 1 if red flags |
-
-Works with anything SQLAlchemy can reach. **Only SQLite is tested in CI so far.** Month bucketing is dialect-aware but
-untested elsewhere, so if a check errors on your warehouse, the plain SQL in [`sql/`](sql/) is the fallback (and please open an issue).
 
 ## Try it in 30 seconds (no warehouse needed)
 
@@ -148,20 +116,6 @@ seven years. (Call yours whatever you like. The default here is `SCHEMA.md`.)
 
 Each check is a small function in `schemakit/` plus a plain-SQL twin in `sql/`. Fork it, delete what you don't need,
 and ask Claude to add the diagnostics *your* data keeps needing (a snapshot-consistency check, a currency-mix check…).
-
-## Layout
-
-```
-README.md  AGENTS.md  pyproject.toml
-.claude/commands/   /schema-init  /schema-add  /schema-ask
-docs/        the method, one page per step
-prompts/     copy-paste AI prompts for chat-only use (the slash commands cover Claude Code)
-templates/   QUERY_PLAN template      schemakit/templates/  SCHEMA + DOMAINS templates
-sql/         plain-SQL versions of every check
-schemakit/   the CLI
-examples/    demo warehouse, worked QUERY_PLAN, generated output
-tests/       python -m unittest discover -s tests
-```
 
 ## License
 
