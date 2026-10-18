@@ -1,33 +1,15 @@
-# schema-toolkit: know your tables before you write your 100-day plan
+# schema-toolkit: build your own `SCHEMA.md` when you join a new company
 
-A process, and a small CLI, for building a local `SCHEMA.md` that grounds your AI assistant in your warehouse: tables,
-grains, keys, relationships, time windows, traps. The AI never touches your database. You run the measurements; the AI reasons from what you paste.
+**For anyone starting a new data, analytics, ML or engineering job** (or inheriting a warehouse they didn't build) who
+wants to learn the tables fast and get an AI assistant that doesn't guess.
 
-## The idea
+You'll end up with a verified, local `SCHEMA.md`: for each table, its grain, primary key, time columns and traps; for
+each join, its cardinality and orphan rate; plus the rules for turning a business question into a query that is planned,
+checked for leakage and honest about whether there's any signal.
 
-My real onboarding at Sephora didn't come from a training deck.
-
-About seven years ago, when I joined, it happened over informal lunch-time BigQuery workshops. We dove deep into data
-flows, schema quirks, table relationships. That's how I built my initial mental map of our table structures. I couldn't
-have started better.
-
-Fast forward to today. Sephora's data stack now features a solid Customer Data Platform, built over time by our
-Analytics Engineering function. As I step into leading Data & ML initiatives, my way of navigating that landscape has
-evolved. I've moved away from a personal mental map to a structured local artifact: `bq_schema_ref.md`.
-
-Even without giving LLMs direct database access, having this context loaded in my IDE lets me dive straight into
-problem-solving. Recently I was brainstorming ways to investigate loyalty tier downgrades and validating CLV drivers.
-Once the scope and constraints are defined, the schema context grounds the AI to structure queries in clear blocks:
-
-1. **What to measure:** parameters, snapshot windows
-2. **How to source it:** data assembly
-3. **Does the data look right?** QA, assertions
-4. **Does it have signal? If not, why?** statistical validation, diagnostics
-
-My 2¢: know your tables before writing your 100-day plan.
-
-This repo is that process, generalised, so someone joining a new company can build their own file in a week instead of
-seven years. (Call yours whatever you like. The default here is `SCHEMA.md`.)
+- **Works for any company and any warehouse.** Nothing here is specific to one industry or stack.
+- **A week, not years.** Pick 5–6 domains, profile their anchor tables, prove the joins, grow from there.
+- **The AI never touches your database.** You run the measurements; the AI reasons from what you paste.
 
 ## Install: paste this into Claude Code
 
@@ -131,10 +113,36 @@ Builds a toy SaaS warehouse (SQLite) with planted traps, then runs the whole wor
 - **Your `SCHEMA.md` describes your employer's data.** It's git-ignored here on purpose; don't publish it.
 - `signal` is a univariate screen, not a causal claim or a substitute for a model and a holdout.
 
+## Why this exists (the author's story)
+
+My real onboarding at Sephora didn't come from a training deck.
+
+About seven years ago, when I joined, it happened over informal lunch-time BigQuery workshops. We dove deep into data
+flows, schema quirks, table relationships. That's how I built my initial mental map of our table structures. I couldn't
+have started better.
+
+Fast forward to today. Sephora's data stack now features a solid Customer Data Platform, built over time by our
+Analytics Engineering function. As I step into leading Data & ML initiatives, my way of navigating that landscape has
+evolved. I've moved away from a personal mental map to a structured local artifact: `bq_schema_ref.md`.
+
+Even without giving LLMs direct database access, having this context loaded in my IDE lets me dive straight into
+problem-solving. Recently I was brainstorming ways to investigate loyalty tier downgrades and validating CLV drivers.
+Once the scope and constraints are defined, the schema context grounds the AI to structure queries in clear blocks:
+
+1. **What to measure:** parameters, snapshot windows
+2. **How to source it:** data assembly
+3. **Does the data look right?** QA, assertions
+4. **Does it have signal? If not, why?** statistical validation, diagnostics
+
+My 2¢: know your tables before writing your 100-day plan.
+
+This repo is that process, generalised, so anyone joining a new company can build their own file in a week instead of
+seven years. (Call yours whatever you like. The default here is `SCHEMA.md`.)
+
 ## Adding your own checks
 
 Each check is a small function in `schemakit/` plus a plain-SQL twin in `sql/`. Fork it, delete what you don't need,
-and ask Claude to add the diagnostics *your* data keeps needing (a loyalty-tier snapshot check, a currency-mix check…).
+and ask Claude to add the diagnostics *your* data keeps needing (a snapshot-consistency check, a currency-mix check…).
 
 ## Layout
 
