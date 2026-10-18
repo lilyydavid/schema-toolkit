@@ -9,6 +9,17 @@ of guessing.
 
 It's a starting point, not a finished product. Fork it, delete what you don't need, and add the checks your data keeps needing.
 
+## The idea
+
+My real onboarding at Sephora didn't come from a training deck. About seven years ago it happened over informal
+lunch-time BigQuery workshops, and that's how I built my first mental map of our tables.
+
+Today Sephora's stack has a solid Customer Data Platform. I've moved that mental map into a structured local file,
+`bq_schema_ref.md`. It grounds my AI assistant without giving it database access, which is how I work through questions
+like loyalty tier downgrades and CLV drivers.
+
+This repo is that process, generalised. Call your file whatever you like. The default here is `SCHEMA.md`.
+
 ## What's in it
 
 - **`schemakit`**, a small command-line tool that measures your tables and checks your joins.
@@ -97,17 +108,6 @@ and a sloppy query that peeks at the future.
 1. Write a function in `schemakit/` for the check you need.
 2. Add the same check as plain SQL in `sql/`, so people without the tool can run it.
 3. Add a test in `tests/test_toolkit.py`, then run `python3 -m unittest discover -s tests`.
-
-## Why this exists
-
-My real onboarding at Sephora didn't come from a training deck. About seven years ago it happened over informal
-lunch-time BigQuery workshops, and that's how I built my first mental map of our tables.
-
-Today Sephora's stack has a solid Customer Data Platform. I've moved that mental map into a structured local file,
-`bq_schema_ref.md`. It grounds my AI assistant without giving it database access, which is how I work through questions
-like loyalty tier downgrades and CLV drivers.
-
-This repo is that process, generalised. Call your file whatever you like. The default here is `SCHEMA.md`.
 
 ## License
 
