@@ -41,6 +41,9 @@ If you're Claude Code following the prompt above, do these in order:
 
 Prefer no AI at all? Everything is plain commands (below), and every check has a copy-paste SQL version in [`sql/`](sql/).
 
+**Slash commands or prompts?** Use the slash commands in Claude Code. They're limited to running `schemakit` and editing files.
+Use [`prompts/`](prompts/) when you're in a chat assistant without the commands installed.
+
 ## The eight steps
 
 | # | step | you do | tool | guide |
@@ -61,6 +64,7 @@ Steps 1–5 build the baseline once and keep it fresh. Steps 6–8 are your four
 ```bash
 pip install -e .                       # add a driver for your warehouse, e.g. pip install "schemakit[bigquery]"
 export SCHEMAKIT_URL="bigquery://my-project/my_dataset"    # any SQLAlchemy URL; use a read-only role
+# Only SQLite is tested in CI. For other warehouses, run the same checks from sql/ if a command errors.
 
 schemakit init                         # creates SCHEMA.md and DOMAINS.md from templates
 schemakit inventory --schema silver,gold --counts --out inventory.md
@@ -81,7 +85,7 @@ schemakit lint
 | `signal` | feature↔label screen: permutation p, time stability, quintile lift | 2 if no signal |
 | `diagnose` | coverage, gaps, percentiles, nulls, predicates, trends, dupes | 1 if red flags |
 
-Works with anything SQLAlchemy can reach. Only SQLite is tested in CI so far; month bucketing is dialect-aware but
+Works with anything SQLAlchemy can reach. **Only SQLite is tested in CI so far.** Month bucketing is dialect-aware but
 untested elsewhere, so if a check errors on your warehouse, the plain SQL in [`sql/`](sql/) is the fallback (and please open an issue).
 
 ## Try it in 30 seconds (no warehouse needed)
@@ -108,6 +112,7 @@ Builds a toy SaaS warehouse (SQLite) with planted traps, then runs the whole wor
 ## Safety
 
 - **The AI gets no database access by default.** You run commands and paste output. `AGENTS.md` enforces this.
+- **`--where`, `--sql` and `qa --sql` paste SQL into queries as-is.** That's fine for a local tool you run on your own queries; never feed it untrusted input.
 - **Use a read-only role** for anything that connects. schemakit only issues `SELECT`s, but enforce that at the database.
 - **Profiling scans tables.** On big tables use a sample or partition-limited view; `inventory --counts` is opt-in.
 - **Your `SCHEMA.md` describes your employer's data.** It's git-ignored here on purpose; don't publish it.
@@ -149,8 +154,8 @@ and ask Claude to add the diagnostics *your* data keeps needing (a snapshot-cons
 ```
 README.md  AGENTS.md  pyproject.toml
 .claude/commands/   /schema-init  /schema-add  /schema-ask
-docs/        the method, one page per step (+ substack-post.md)
-prompts/     copy-paste AI prompts for chat-only use
+docs/        the method, one page per step
+prompts/     copy-paste AI prompts for chat-only use (the slash commands cover Claude Code)
 templates/   QUERY_PLAN template      schemakit/templates/  SCHEMA + DOMAINS templates
 sql/         plain-SQL versions of every check
 schemakit/   the CLI

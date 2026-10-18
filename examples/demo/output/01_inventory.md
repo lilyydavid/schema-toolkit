@@ -20,5 +20,5 @@ _Guesses are heuristics. Confirm the layer and domain before you trust them._
 
 ## Next
 
-1. Pick the 5–6 domains that define your business (see `docs/02-pick-domains.md`).
+1. Pick the 5–6 domains that define your business (see the domains guide, `docs/02-pick-domains.md` in the schema-toolkit repo).
 2. `schemakit profile --table <t> --domain <d> --layer <l> --write` for each anchor table.

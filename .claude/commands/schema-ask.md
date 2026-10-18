@@ -1,6 +1,6 @@
 ---
 description: Answer a data question grounded in SCHEMA.md; plan, SQL, QA, signal, diagnostics
-allowed-tools: [Bash, Read, Write, Edit]
+allowed-tools: [Bash(schemakit:*), Bash(python3 -m schemakit:*), Read, Write, Edit]
 argument-hint: <business question>
 ---
 

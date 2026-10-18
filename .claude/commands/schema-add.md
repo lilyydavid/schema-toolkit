@@ -1,6 +1,6 @@
 ---
 description: Add one table to SCHEMA.md; profile it, prove its relationships, lint
-allowed-tools: [Bash, Read, Write, Edit]
+allowed-tools: [Bash(schemakit:*), Bash(python3 -m schemakit:*), Read, Write, Edit]
 argument-hint: <schema.table>
 ---
 

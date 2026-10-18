@@ -1,6 +1,6 @@
 ---
 description: Start a SCHEMA.md for a new company; interview, propose domains, scaffold files
-allowed-tools: [Bash, Read, Write, Edit]
+allowed-tools: [Bash(schemakit:*), Bash(python3 -m schemakit:*), Read, Write, Edit]
 ---
 
 You are helping the user build a grounded SCHEMA.md for a warehouse they have just met. Follow `docs/01` and `docs/02`
