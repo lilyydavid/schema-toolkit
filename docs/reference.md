@@ -58,3 +58,31 @@ schemakit/   the CLI
 examples/    demo warehouse, worked QUERY_PLAN, generated output
 tests/       python -m unittest discover -s tests
 ```
+
+## The four blocks
+
+Every question runs through four blocks. Steps 6–8 in the table above are these.
+
+1. **What to measure:** parameters and snapshot windows (`QUERY_PLAN`).
+2. **How to source it:** data assembly, with each join's cardinality.
+3. **Does the data look right?** QA assertions: grain, fan-out, leakage, nulls.
+4. **Does it have signal? If not, why?** Signal screen, then diagnostics.
+
+## What the demo catches
+
+| planted trap | caught by |
+|---|---|
+| 3% of `events.customer_id` match no customer | `relate`: `match 97.02%, orphans 4,148` |
+| `invoice_id` duplicated (1% of rows) | `profile`: `VIOLATED (346 duplicate rows)`, `lint` ERROR |
+| `customer_id` INTEGER in one table, TEXT in another | `lint`: same column, different types |
+| `silver_customers` vs `gold_customers` twins | `lint`: record which is canonical |
+| no events at all in August 2025 | `diagnose`: `months with ZERO rows: 2025-08` |
+| `Open` / `open` / `OPEN ` statuses | `diagnose`: case/whitespace variants |
+| mistyped predicate removes every row | `diagnose --where`: `removes every row` |
+| naive query fans out and peeks past the anchor | `qa`: `grain_unique FAIL`, `no_leakage FAIL` |
+| a real effect hidden in the data | `signal`: `events_30d` r = −0.49, monotonic quintile lift |
+
+## Adding your own checks
+
+Each check is a small function in `schemakit/` plus a plain-SQL twin in `sql/`. Fork it, delete what you don't need, and
+ask Claude to add the diagnostics your data keeps needing.
