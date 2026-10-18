@@ -43,7 +43,7 @@ schemakit lint
 | `diagnose` | coverage, gaps, percentiles, nulls, predicates, trends, dupes | 1 if red flags |
 
 Works with anything SQLAlchemy can reach. **Only SQLite is tested in CI so far.** Month bucketing is dialect-aware but
-untested elsewhere, so if a check errors on your warehouse, the plain SQL in [`sql/`](../sql/) is the fallback (and please open an issue).
+untested elsewhere, so if a check errors on your data stack, the plain SQL in [`sql/`](../sql/) is the fallback (and please open an issue).
 
 ## Layout
 
@@ -55,7 +55,7 @@ prompts/     copy-paste AI prompts for chat-only use (the slash commands cover C
 templates/   QUERY_PLAN template      schemakit/templates/  SCHEMA + DOMAINS templates
 sql/         plain-SQL versions of every check
 schemakit/   the CLI
-examples/    demo warehouse, worked QUERY_PLAN, generated output
+examples/    demo data stack, worked QUERY_PLAN, generated output
 tests/       python -m unittest discover -s tests
 ```
 

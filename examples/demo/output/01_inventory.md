@@ -1,4 +1,4 @@
-# Warehouse inventory
+# Data stack inventory
 
 _Guesses are heuristics. Confirm the layer and domain before you trust them._
 

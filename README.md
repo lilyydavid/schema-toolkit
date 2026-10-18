@@ -1,10 +1,10 @@
 # schema-toolkit: build your own `SCHEMA.md` when you join a new company
 
-For anyone starting a data, analytics, ML or engineering job, or inheriting a warehouse they didn't build. In about a
+For anyone starting a data, analytics, ML or engineering job, or inheriting a data stack they didn't build. In about a
 week you'll have a verified, local `SCHEMA.md`: each table's grain, keys, time columns and traps, and each join's
 cardinality and orphan rate. Your AI assistant then plans queries from it instead of guessing.
 
-- **Any company, any warehouse.** Nothing here is specific to one industry or stack.
+- **Any company, any database.** Nothing here is specific to one industry or stack.
 - **The AI never touches your database.** You run the measurements and paste the output.
 - **A starting point to fork.** Delete what you don't need and add the checks your data keeps needing.
 
@@ -20,9 +20,9 @@ cardinality and orphan rate. Your AI assistant then plans queries from it instea
 4. Run the demo: `bash ~/schema-toolkit/examples/demo/run_demo.sh`. Show the user `examples/demo/output/SCHEMA.example.md`
    and the QA output (`05a_qa_leaky.txt` vs `05b_qa_clean.txt`).
 5. Tell the user the toolkit is installed. That's it. Type `/schema-init` in the folder where their `SCHEMA.md` will live.
-6. Start the interview now. Ask 2–3 short questions together: what the company sells, which warehouse, and the questions
+6. Start the interview now. Ask 2–3 short questions together: what the company sells, which data stack, and the questions
    the business keeps asking. Then propose 5–6 domains and the first tables to profile, following `/schema-init`.
-7. Never ask for database credentials or connect to the warehouse yourself. Propose commands; the user runs them and
+7. Never ask for database credentials or connect to the database yourself. Propose commands; the user runs them and
    pastes the output. Only run `schemakit` against a database if the user explicitly allows it, with a read-only role.
 
 ## Commands
@@ -36,13 +36,13 @@ cardinality and orphan rate. Your AI assistant then plans queries from it instea
 The method is in [`docs/`](docs/), one page per step. Every command and its manual usage is in
 [`docs/reference.md`](docs/reference.md). Prefer no AI? Every check also has a plain SQL version in [`sql/`](sql/).
 
-## Try the demo (no warehouse needed)
+## Try the demo (no database needed)
 
 ```bash
 bash examples/demo/run_demo.sh
 ```
 
-It builds a toy SaaS warehouse with planted traps and shows each one being caught, in
+It builds a toy SaaS data stack with planted traps and shows each one being caught, in
 [`examples/demo/output/`](examples/demo/output/). Traps include orphaned keys, duplicated rows, a missing month, and a
 sloppy query that fans out and leaks future data.
 

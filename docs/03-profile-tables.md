@@ -20,7 +20,7 @@ Event and CDP tables often hide the interesting fields in a JSON column. Record,
 - the column name and its format (JSON string, VARIANT, STRUCT)
 - the 5–10 keys you actually need and their types (`properties.plan`, `properties.amount`)
 - whether keys vary by `event_type` (they usually do)
-- the extraction expression for your warehouse (`properties:plan::string`, `JSON_EXTRACT_SCALAR(...)`, `properties->>'plan'`)
+- the extraction expression for your data stack (`properties:plan::string`, `JSON_EXTRACT_SCALAR(...)`, `properties->>'plan'`)
 
 Sample first: `SELECT <json_col> FROM t LIMIT 50` and list the union of keys. `schemakit` profiles the column like any other (null rate, distinct count); you document the keys by hand.
 

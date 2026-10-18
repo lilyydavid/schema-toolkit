@@ -1,6 +1,6 @@
 # DOMAINS.md — worksheet
 
-Fill this in *before* touching the warehouse. It stops you profiling 4,000 tables.
+Fill this in *before* touching the data stack. It stops you profiling 4,000 tables.
 
 ## 1. Business model in one sentence
 

@@ -1,4 +1,4 @@
-"""Build a small SQLite warehouse with realistic traps so you can practise the workflow.
+"""Build a small SQLite data stack with realistic traps so you can practise the workflow.
 
 Usage: python examples/demo/make_demo_db.py examples/demo/demo.db
 

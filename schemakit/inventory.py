@@ -1,4 +1,4 @@
-"""Step 1: map the warehouse. Lists tables, guesses layer + domain, and surfaces shared key columns."""
+"""Step 1: map the data stack. Lists tables, guesses layer + domain, and surfaces shared key columns."""
 from __future__ import annotations
 
 import re
@@ -87,7 +87,7 @@ def run(engine, schemas: list[str | None], counts: bool = False) -> str:
             )
     rows.sort(key=lambda r: (r["domain"], r["layer"], r["table"]))
 
-    out = ["# Warehouse inventory", "", "_Guesses are heuristics. Confirm the layer and domain before you trust them._", ""]
+    out = ["# Data stack inventory", "", "_Guesses are heuristics. Confirm the layer and domain before you trust them._", ""]
     out += [
         "| table | layer? | domain? | cols | rows | declared PK | id-like cols | time-like cols |",
         "|---|---|---|---|---|---|---|---|",

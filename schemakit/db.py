@@ -1,4 +1,4 @@
-"""Thin database helpers. Everything goes through SQLAlchemy so any warehouse with a driver works."""
+"""Thin database helpers. Everything goes through SQLAlchemy so any database with a driver works."""
 from __future__ import annotations
 
 from sqlalchemy import create_engine, text

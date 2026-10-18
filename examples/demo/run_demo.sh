@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# End-to-end demo: build a toy warehouse, then walk the whole schemakit workflow.
+# End-to-end demo: build a toy data stack, then walk the whole schemakit workflow.
 # Outputs land in examples/demo/output/ so you can read what each step produces.
 set -u
 HERE="$(cd "$(dirname "$0")" && pwd)"

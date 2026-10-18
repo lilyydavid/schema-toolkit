@@ -9,7 +9,7 @@ pick a table → profile → validate its edges to tables already in SCHEMA.md �
 ```
 
 Order matters: anchor tables first, then their children, then the long tail as questions demand it.
-**Don't profile the whole warehouse.** An unread table you never needed costs nothing; a wrong entry costs a lot.
+**Don't profile the whole data stack.** An unread table you never needed costs nothing; a wrong entry costs a lot.
 
 ## What SCHEMA.md contains
 

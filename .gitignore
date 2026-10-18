@@ -6,6 +6,6 @@ dist/
 .venv/
 *.db
 .env
-# your real warehouse schema is private: keep it out of the public toolkit repo
+# your real data stack schema is private: keep it out of the public toolkit repo
 /SCHEMA.md
 /DOMAINS.md

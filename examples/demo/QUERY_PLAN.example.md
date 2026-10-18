@@ -1,6 +1,6 @@
 # QUERY_PLAN — Which active customers will churn in the next 60 days?
 
-Worked example on the demo warehouse (`examples/demo/`). Compare with `query_clean.sql` and `query_leaky_fanout.sql`.
+Worked example on the demo data stack (`examples/demo/`). Compare with `query_clean.sql` and `query_leaky_fanout.sql`.
 
 ## 1. Problem
 

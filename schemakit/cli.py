@@ -138,7 +138,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     s = add("inventory", cmd_inventory, "list tables, guess layer/domain, surface shared keys")
     s.add_argument("--schema", help="comma-separated schemas (default: the connection default)")
-    s.add_argument("--counts", action="store_true", help="include row counts (slow on big warehouses)")
+    s.add_argument("--counts", action="store_true", help="include row counts (slow on big data stacks)")
     s.add_argument("--out", help="write to a file instead of stdout")
 
     s = add("profile", cmd_profile, "profile a table: grain, PK, nulls, time ranges")

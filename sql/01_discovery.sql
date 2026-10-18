@@ -24,7 +24,7 @@ GROUP BY column_name
 HAVING COUNT(DISTINCT table_schema || '.' || table_name) > 1
 ORDER BY n_tables DESC;
 
--- 1d. Declared constraints (often missing in warehouses; don't rely on them)
+-- 1d. Declared constraints (often missing in data stacks; don't rely on them)
 SELECT tc.table_name, tc.constraint_type, kcu.column_name
 FROM information_schema.table_constraints tc
 JOIN information_schema.key_column_usage kcu

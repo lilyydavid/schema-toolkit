@@ -1,6 +1,6 @@
 # 2. Pick the 5–6 domains that define the business
 
-A warehouse can have thousands of tables. A business has maybe six things it fundamentally does. Start from the
+A data stack can have thousands of tables. A business has maybe six things it fundamentally does. Start from the
 business, not the catalog.
 
 ## Method

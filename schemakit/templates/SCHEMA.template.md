@@ -1,4 +1,4 @@
-# SCHEMA.md — <Company> data warehouse
+# SCHEMA.md — <Company> data stack
 
 > Grounding document for humans and AI. Anything not in here is a guess. Facts marked "verified" were
 > checked with a query on the date shown. Regions between `<!-- schemakit:... -->` comments are

@@ -2,7 +2,7 @@
 
 ```
 I just joined <company>, which <one sentence on what it sells and how it makes money>.
-I have not seen the warehouse yet.
+I have not seen the data stack yet.
 
 1. Propose the 5–6 business domains I should map first, each with its core entity and likely unique id.
 2. List the questions I should ask the data team to find out: whether a CDP/identity layer exists, the layering
