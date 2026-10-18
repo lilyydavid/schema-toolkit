@@ -28,40 +28,21 @@ This repo is that process, generalised. Call your file whatever you like. The de
 - **Plain SQL** for every check in `sql/`, if you'd rather not install anything.
 - **A demo** with a fake database full of planted mistakes, so you can see each one get caught.
 
-## Install: paste this into Claude Code
+## Install
 
-> Install the toolkit at https://github.com/lilydavida/schema-toolkit by following its `## Setup instructions for Claude Code` section in the README. Then run the demo, and help me build my SCHEMA.md.
+Paste this into Claude Code:
 
-That's it. Claude will clone the repo, install the tool, add the slash commands, run the demo, and start asking you about
-your company.
+> Install the toolkit at https://github.com/lilydavida/schema-toolkit by following its `INSTALL.md`. Then run the demo, and help me build my SCHEMA.md.
 
-## Setup instructions for Claude Code
-
-If you're Claude Code following the prompt above, do these steps in order:
-
-1. **Clone** (skip if it exists): `git clone https://github.com/lilydavida/schema-toolkit.git ~/schema-toolkit`
-2. **Install the CLI:** `pip install -e ~/schema-toolkit`. The only dependency is SQLAlchemy.
-3. **Install the slash commands** globally, so they work in every project:
-   `mkdir -p ~/.claude/commands && cp ~/schema-toolkit/.claude/commands/*.md ~/.claude/commands/`
-4. **Run the demo** so the user sees it work with no database: `bash ~/schema-toolkit/examples/demo/run_demo.sh`.
-   Show them `examples/demo/output/SCHEMA.example.md` and the QA output (`05a_qa_leaky.txt` vs `05b_qa_clean.txt`).
-5. **Tell the user** the toolkit is installed. Type `/schema-init` in the folder where their `SCHEMA.md` should live.
-6. **Start the interview now.** Ask 2–3 short questions together: what the company sells, which database it runs on, and
-   the questions the business keeps asking. Then propose 5–6 domains and the first tables to profile, following `/schema-init`.
-7. **Never ask for database credentials, and don't connect to the database yourself.** Propose commands; the user runs
-   them and pastes the output back. Only run `schemakit` against a database if the user explicitly allows it, using a read-only role.
-
-## Manual install
-
-If you'd rather do it yourself:
+Or do it yourself (Python 3.9+):
 
 ```bash
+git clone https://github.com/lilydavida/schema-toolkit.git ~/schema-toolkit
 pip install -e ~/schema-toolkit
-bash ~/schema-toolkit/examples/demo/run_demo.sh      # optional: see it work first
-cd ~/my-project && schemakit init                      # creates SCHEMA.md and DOMAINS.md
+mkdir -p ~/.claude/commands && cp ~/schema-toolkit/.claude/commands/*.md ~/.claude/commands/   # slash commands, needs Claude Code
 ```
 
-You'll need Python 3.9 or newer. The slash commands need Claude Code; everything else works without it.
+Then run `schemakit init` in the folder where your `SCHEMA.md` should live.
 
 ## Connect to your database (optional)
 
